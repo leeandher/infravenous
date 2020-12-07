@@ -15,7 +15,11 @@ server.listen(port, () => {
 });
 
 // Create an endpoint for the latency test
-server.post("/latency-test", (_req, res) => {
+server.post("/latency-test", (req, res) => {
+  console.log({
+    confidence: req.body.result.confidence,
+    isAuth: req.body.result.is_authenticated,
+  });
   const resTime = Date.now();
   const mockResponse = {
     timestamp: resTime,
