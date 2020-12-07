@@ -24,7 +24,3 @@ server.post("/latency-test", (req, res) => {
   };
   res.status(201).send(mockResponse);
 });
-
-server.get("/get", (req, res) => {
-  res.send("nice");
-});
