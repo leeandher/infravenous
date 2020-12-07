@@ -15,12 +15,10 @@ server.listen(port, () => {
 });
 
 // Create an endpoint for the latency test
-server.post("/latency-test", (req, res) => {
-  const { timestamp: reqTime } = req.body;
+server.post("/latency-test", (_req, res) => {
   const resTime = Date.now();
   const mockResponse = {
     timestamp: resTime,
-    outgoingDelta: resTime - reqTime,
   };
   res.status(201).send(mockResponse);
 });

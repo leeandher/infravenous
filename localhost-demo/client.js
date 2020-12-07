@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 // Declaring constants
 const URL = "http://localhost:2021/latency-test";
 const RESULTS = [];
-const SAMPLE_SIZE = 5000;
+const SAMPLE_SIZE = 500;
 
 // Create a mock authentication request
 async function mockPostRequest(iteration) {
@@ -24,7 +24,6 @@ async function mockPostRequest(iteration) {
         is_authenticated: confidence > 0.8,
       },
       attemptCount: iteration,
-      timestamp: Date.now(),
     }),
   });
   return response.json();
@@ -37,7 +36,7 @@ async function runLatencyTests(n) {
     const response = await mockPostRequest(i);
     const postRequestInstant = Date.now();
     RESULTS.push({
-      ...response,
+      outgoingDelta: response.timestamp - preRequestInstant,
       incomingDelta: postRequestInstant - response.timestamp,
       roundDelta: postRequestInstant - preRequestInstant,
     });
