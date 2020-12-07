@@ -1,2 +1,5 @@
-# Ignore the python virtual environment
-/venv
+# Python virtual environment
+venv
+
+# JS dependencies
+node_modules

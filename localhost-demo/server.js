@@ -11,7 +11,7 @@ server.use(bodyParser.json());
 
 // Register the test-server on the port
 server.listen(port, () => {
-  console.log(`Demo App running on Port:${port}`);
+  console.log(`Demo app running on Port:${port}`);
 });
 
 // Create an endpoint for the latency test
@@ -23,4 +23,8 @@ server.post("/latency-test", (req, res) => {
     outgoingDelta: resTime - reqTime,
   };
   res.status(201).send(mockResponse);
+});
+
+server.get("/get", (req, res) => {
+  res.send("nice");
 });

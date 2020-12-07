@@ -45,7 +45,7 @@ async function runLatencyTests(n) {
 }
 
 // Run tests and print results to the console
-async function main() {
+(async function main() {
   console.info(`Starting ${SAMPLE_SIZE} test(s) at ${new Date()}`);
   await runLatencyTests(SAMPLE_SIZE);
   console.info(`Starting ${SAMPLE_SIZE} test(s) at ${new Date()}`);
@@ -72,6 +72,4 @@ async function main() {
   console.info(
     `Average round-trip latency (ms): ${summary.roundDelta / SAMPLE_SIZE}`
   );
-}
-
-main();
+})();
