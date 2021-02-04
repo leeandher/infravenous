@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "infravenous",
-    "slug": "infravenous",
+    "name": "infravenous-mobile",
+    "slug": "infravenous-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
