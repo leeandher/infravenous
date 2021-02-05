@@ -53,6 +53,7 @@
   },
   "eslintConfig": {
     "extends": [
+      "eslint:recommended",
       "typescript",
       "typescript/react",
       "typescript/prettier",
