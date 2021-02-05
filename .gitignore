@@ -3,3 +3,5 @@ venv
 
 # JS dependencies
 node_modules
+.env
+.keystone
