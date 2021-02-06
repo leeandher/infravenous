@@ -1,43 +1,28 @@
 import React from "react";
 import Link from "next/link";
 
-interface Props {
+interface ButtonProps {
   href?: string;
   children: any;
   type?: "external" | "internal" | "button";
 }
 
-const Button = ({ children, href, type = "button" }: Props) => {
-  let styling = `
-    w-full
-    flex
-    items-center
-    justify-center
-    px-8
-    py-3
-    border-transparent
-    text-base
-    font-medium
-    rounded-md
-    text-pink-700
-    bg-pink-100
-    hover:bg-pink-200
-  `;
+const Button = ({ children, href, type = "button" }: ButtonProps) => {
   switch (type) {
     case "external":
       return (
-        <a href={href} className={styling}>
+        <a href={href}>
           <button>{children}</button>
         </a>
       );
     case "internal":
       return (
         <Link href={href}>
-          <button className={styling}>{children}</button>
+          <button>{children}</button>
         </Link>
       );
     default:
-      return <button className={styling}>{children}</button>;
+      return <button>{children}</button>;
   }
 };
 

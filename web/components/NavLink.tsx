@@ -1,22 +1,26 @@
 import Link from "next/link";
+import styled from "styled-components";
 
-function NavLink() {
-  const wrapperStyles = `
-    whitespace-nowrap
-    self-center
-    rounded-full
-    px-5
-    py-2
-    text-xl
-    font-semibold
-    hover:bg-pink-100
-    cursor-pointer
-  `;
+interface NavLinkProps {
+  children: any;
+  href: string | object;
+}
+
+function NavLink({ children, href }: NavLinkProps) {
   return (
-    <Link href="/about">
-      <div className={wrapperStyles}>Sign Up</div>
+    <Link href={href || "/"}>
+      <StylishNavLink>{children}</StylishNavLink>
     </Link>
   );
 }
+
+const StylishNavLink = styled.div`
+  padding: 10px 30px;
+  margin: 8px 10px;
+  font-style: italic;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+`;
 
 export default NavLink;
