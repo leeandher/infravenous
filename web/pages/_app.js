@@ -1,7 +1,24 @@
 import "../styles/globals.css";
 
-function InfravenousApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+import { ApolloProvider } from "@apollo/client";
+import withData from "../lib/withData";
+
+function InfravenousApp({ Component, pageProps, apollo: client }) {
+  console.log(client);
+  return (
+    <ApolloProvider client={client}>
+      <Component {...pageProps} />
+    </ApolloProvider>
+  );
 }
 
-export default InfravenousApp;
+InfravenousApp.getInitialProps = async function ({ Component, ctx }) {
+  let pageProps = {};
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+  pageProps.query = ctx.query;
+  return pageProps;
+};
+
+export default withData(InfravenousApp);
