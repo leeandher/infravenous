@@ -5,7 +5,7 @@ interface Props {
 }
 
 const Text = ({ children }: Props) => {
-  let styling = `
+  const styling = `
     text-base 
     text-gray-600 
     mt-3  
