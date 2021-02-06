@@ -3,7 +3,7 @@ import Button from "../components/Button";
 import Nav from "../components/Nav";
 import styled from "styled-components";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div>
       <Head>

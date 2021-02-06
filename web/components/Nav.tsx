@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 function Nav() {
   const user = useUser();
-  console.log(user);
   return (
     <StylishNav>
       <NavLink href="/">❤</NavLink>
