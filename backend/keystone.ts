@@ -1,3 +1,5 @@
+import { Attempt } from './schema/Attempt'
+import { Device } from './schema/Device'
 import { User } from './schema/User'
 import { createAuth } from '@keystone-next/auth'
 import { config, createSchema } from '@keystone-next/keystone/schema'
@@ -38,6 +40,8 @@ export default withAuth(
       url: databaseUrl,
     },
     lists: createSchema({
+      Attempt,
+      Device,
       User,
     }),
     ui: {
