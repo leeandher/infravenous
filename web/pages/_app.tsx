@@ -1,10 +1,11 @@
+// @ts-nocheck
+
 import "../styles/globals.css";
 
 import { ApolloProvider } from "@apollo/client";
 import withData from "../lib/withData";
 
 function InfravenousApp({ Component, pageProps, apollo: client }) {
-  console.log(client);
   return (
     <ApolloProvider client={client}>
       <Component {...pageProps} />
