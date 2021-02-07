@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Nav from "../components/Nav";
+import SignUpForm from "../components/SignUpForm";
 
 export default function SignUpPage() {
   return (
@@ -9,7 +10,10 @@ export default function SignUpPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav />
-      <main>SignUp Page</main>
+      <main>
+        <h2>Sign Up</h2>
+        <SignUpForm />
+      </main>
     </div>
   );
 }

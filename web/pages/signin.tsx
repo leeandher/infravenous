@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Nav from "../components/Nav";
-import SignIn from "../components/SignIn";
+import SignInForm from "../components/SignInForm";
 
 export default function SignInPage() {
   return (
@@ -10,10 +10,8 @@ export default function SignInPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav />
-      <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-        Sign In Page
-      </main>
-      <SignIn />
+      <main>Sign In Page</main>
+      <SignInForm />
     </div>
   );
 }

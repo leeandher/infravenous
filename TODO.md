@@ -9,6 +9,7 @@
 - Stylize the whole gosh darn thing
 - Add an about page with an explanation of the product
 - Display the devices and authentication attempts when signed in
+- Custom Logo and Favicon
 
 ## Mobile
 - Prompt a login attempt

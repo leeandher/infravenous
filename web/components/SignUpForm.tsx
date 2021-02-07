@@ -1,43 +1,53 @@
 import { useMutation } from "@apollo/client";
-import { removeClientSetsFromDocument } from "@apollo/client/utilities";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import useForm from "../lib/useForm";
 import { CURRENT_USER_QUERY } from "./User";
 
-const SIGNIN_MUTATION = gql`
-  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
-    authenticateUserWithPassword(email: $email, password: $password) {
-      ... on UserAuthenticationWithPasswordSuccess {
-        item {
-          id
-        }
-      }
-      ... on UserAuthenticationWithPasswordFailure {
-        code
-        message
-      }
+const SIGNUP_MUTATION = gql`
+  mutation SIGNUP_MUTATION(
+    $email: String!
+    $name: String!
+    $password: String!
+  ) {
+    createUser(data: { email: $email, name: $name, password: $password }) {
+      id
+      email
+      name
     }
   }
 `;
 
-export default function SignIn() {
+export default function SignUpForm() {
   const { inputs, handleChange, resetForm } = useForm({
     email: "lgrodrig@uwaterloo.ca",
+    name: "",
     password: "",
   });
-  const [signIn, { error, loading }] = useMutation(SIGNIN_MUTATION, {
+  const [signUp, { error, loading }] = useMutation(SIGNUP_MUTATION, {
     variables: inputs,
-    refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    // refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
   async function handleSubmit(e) {
     e.preventDefault();
-    await signIn();
+    await signUp();
     resetForm();
   }
   return (
     <StylishForm method="POST" onSubmit={handleSubmit}>
       <fieldset>
+        <label htmlFor="name">
+          Name
+          <input
+            name="name"
+            type="text"
+            placeholder="Your Name"
+            autoComplete="name"
+            // @ts-ignore
+            value={inputs.name}
+            onChange={handleChange}
+          />
+        </label>
         <label htmlFor="email">
           Email
           <input
