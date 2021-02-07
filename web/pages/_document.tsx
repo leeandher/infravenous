@@ -24,7 +24,7 @@ class InfravenousDocument extends Document {
     return (
       <html>
         <Head>
-          {/* Step 5: Output the styles in the head  */}
+          {/* Step 5: Output the styles in the head */}
           {this.props.styleTags}
         </Head>
         <body>

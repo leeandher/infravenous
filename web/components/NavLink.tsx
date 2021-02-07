@@ -14,7 +14,7 @@ function NavLink({ children, href }: NavLinkProps) {
   );
 }
 
-const StylishNavLink = styled.div`
+export const StylishNavLink = styled.div`
   padding: 10px 30px;
   margin: 8px 10px;
   font-style: italic;

@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/client";
+import { removeClientSetsFromDocument } from "@apollo/client/utilities";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import useForm from "../lib/useForm";
@@ -12,12 +13,16 @@ const SIGNIN_MUTATION = gql`
           id
         }
       }
+      ... on UserAuthenticationWithPasswordFailure {
+        code
+        message
+      }
     }
   }
 `;
 
 export default function SignIn() {
-  const { inputs, handleChange } = useForm({
+  const { inputs, handleChange, resetForm } = useForm({
     email: "lgrodrig@uwaterloo.ca",
     password: "",
   });
@@ -27,8 +32,8 @@ export default function SignIn() {
   });
   async function handleSubmit(e) {
     e.preventDefault();
-    const { data } = await signIn();
-    console.log(data);
+    await signIn();
+    resetForm();
   }
   return (
     <StylishForm method="POST" onSubmit={handleSubmit}>
