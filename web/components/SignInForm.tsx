@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
-import styled from "styled-components";
+import { Form, Input, Button, Card } from "antd";
 import useForm from "../lib/useForm";
 import { CURRENT_USER_QUERY } from "./User";
 
@@ -35,41 +35,65 @@ export default function SignInForm() {
     resetForm();
   }
   return (
-    <StylishForm method="POST" onSubmit={handleSubmit}>
-      <fieldset>
-        <label htmlFor="email">
-          Email
-          <input
-            name="email"
-            type="email"
-            placeholder="Your Email"
-            autoComplete="email"
-            // @ts-ignore
-            value={inputs.email}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="password">
-          Password
-          <input
-            name="password"
-            type="password"
-            placeholder="Your Password"
-            autoComplete="password"
-            // @ts-ignore
-            value={inputs.password}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit">Sign In</button>
-      </fieldset>
-    </StylishForm>
+    <Form method="POST" onFinish={handleSubmit}>
+      <Form.Item
+        label="Email"
+        name="email"
+        htmlFor="email"
+        rules={[
+          {
+            required: true,
+            message: "Please input your email address!",
+          },
+        ]}
+        {...layout}
+      >
+        <Input
+          name="email"
+          type="email"
+          placeholder="Your Email"
+          autoComplete="email"
+          // @ts-ignore
+          value={inputs.email}
+          onChange={handleChange}
+        />
+      </Form.Item>
+      <Form.Item
+        label="Password"
+        name="password"
+        htmlFor="password"
+        rules={[
+          {
+            required: true,
+            message: "Please input your password!",
+          },
+        ]}
+        {...layout}
+      >
+        <Input
+          name="password"
+          type="password"
+          placeholder="Your Password"
+          autoComplete="password"
+          // @ts-ignore
+          value={inputs.password}
+          onChange={handleChange}
+        />
+      </Form.Item>
+
+      <Form.Item {...tailLayout}>
+        <Button type="primary" htmlType="submit">
+          Sign In
+        </Button>
+      </Form.Item>
+    </Form>
   );
 }
 
-const StylishForm = styled.form`
-  input,
-  label {
-    display: block;
-  }
-`;
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};

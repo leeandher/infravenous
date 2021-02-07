@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import "../styles/globals.css";
+import "antd/dist/antd.css";
 
 import { ApolloProvider } from "@apollo/client";
 import withData from "../lib/withData";
