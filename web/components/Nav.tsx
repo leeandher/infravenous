@@ -1,7 +1,6 @@
 import Link from "next/link";
-import NavLink, { StylishNavLink } from "./NavLink";
-import { CURRENT_USER_QUERY, useUser } from "./User";
-import styled from "styled-components";
+import { Menu, Space, Button } from "antd";
+import { CURRENT_USER_QUERY, useUser } from "../lib/useUser";
 import { gql, useMutation } from "@apollo/client";
 
 const SIGNOUT_MUTATION = gql`
@@ -22,32 +21,26 @@ function Nav() {
   }
 
   return (
-    <StylishNav>
-      <NavLink href="/">❤</NavLink>
-      <div className="link">
-        <NavLink href="/about">About</NavLink>
+    <Menu mode="horizontal">
+      <Link href="/">
+        <Button type="text">Infravenous</Button>
+      </Link>
+      <Space style={{ float: "right", marginRight: "0.8rem" }}>
         {!user ? (
           <>
-            <NavLink href="/signup">Sign Up</NavLink>
-            <NavLink href="/signin">Log In</NavLink>
+            <Link href="/access">
+              <Button>Log In</Button>
+            </Link>
+            <Link href="/access">
+              <Button type="primary">Sign Up</Button>
+            </Link>
           </>
         ) : (
-          <StylishNavLink onClick={handleSignOut}>Log Out</StylishNavLink>
+          <Menu.Item onClick={handleSignOut}>Log Out</Menu.Item>
         )}
-      </div>
-    </StylishNav>
+      </Space>
+    </Menu>
   );
 }
-
-const StylishNav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  .logo {
-  }
-  .link {
-    display: flex;
-    justify-content: flex-end;
-  }
-`;
 
 export default Nav;

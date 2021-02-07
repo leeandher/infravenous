@@ -1,8 +1,10 @@
 import Head from "next/head";
 import Nav from "../components/Nav";
+import { Layout, Row } from "antd";
+import SignInForm from "../components/SignInForm";
 import SignUpForm from "../components/SignUpForm";
 
-export default function SignUpPage() {
+export default function SignInPage() {
   return (
     <div>
       <Head>
@@ -11,8 +13,12 @@ export default function SignUpPage() {
       </Head>
       <Nav />
       <main>
-        <h2>Sign Up</h2>
-        <SignUpForm />
+        <Layout>
+          <Row justify="space-around" align="top">
+            <SignInForm />
+            <SignUpForm />
+          </Row>
+        </Layout>
       </main>
     </div>
   );

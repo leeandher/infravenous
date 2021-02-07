@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import { Form, Input, Button, Card } from "antd";
 import useForm from "../lib/useForm";
-import { CURRENT_USER_QUERY } from "./User";
+import { CURRENT_USER_QUERY } from "../lib/useUser";
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -29,64 +29,59 @@ export default function SignInForm() {
     variables: inputs,
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit() {
     await signIn();
     resetForm();
   }
   return (
-    <Form method="POST" onFinish={handleSubmit}>
-      <Form.Item
-        label="Email"
-        name="email"
-        htmlFor="email"
-        rules={[
-          {
-            required: true,
-            message: "Please input your email address!",
-          },
-        ]}
-        {...layout}
-      >
-        <Input
+    <Card title="Log In to your Account" hoverable>
+      <Form method="POST" onFinish={handleSubmit}>
+        <Form.Item
+          label="Email"
           name="email"
-          type="email"
-          placeholder="Your Email"
-          autoComplete="email"
-          // @ts-ignore
-          value={inputs.email}
-          onChange={handleChange}
-        />
-      </Form.Item>
-      <Form.Item
-        label="Password"
-        name="password"
-        htmlFor="password"
-        rules={[
-          {
-            required: true,
-            message: "Please input your password!",
-          },
-        ]}
-        {...layout}
-      >
-        <Input
+          htmlFor="email"
+          rules={[
+            {
+              required: true,
+              message: "Please input your email address!",
+            },
+          ]}
+          {...layout}
+        >
+          <Input
+            name="email"
+            type="email"
+            placeholder="Your Email"
+            autoComplete="email"
+            // @ts-ignore
+            value={inputs.email}
+            onChange={handleChange}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Password"
           name="password"
-          type="password"
-          placeholder="Your Password"
-          autoComplete="password"
-          // @ts-ignore
-          value={inputs.password}
-          onChange={handleChange}
-        />
-      </Form.Item>
-
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Sign In
-        </Button>
-      </Form.Item>
-    </Form>
+          htmlFor="password"
+          rules={[{ required: true, message: "Please input your password!" }]}
+          {...layout}
+        >
+          <Input
+            name="password"
+            type="password"
+            placeholder="Your Password"
+            autoComplete="password"
+            // @ts-ignore
+            value={inputs.password}
+            onChange={handleChange}
+          />
+        </Form.Item>
+        <Form.Item {...tailLayout}>
+          <Button type="primary" htmlType="submit">
+            Sign In
+          </Button>
+        </Form.Item>
+      </Form>
+    </Card>
   );
 }
 

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Button from "../components/Button";
+import { Button, Typography } from "antd";
 import Nav from "../components/Nav";
 import styled from "styled-components";
 
@@ -11,8 +11,10 @@ export default function HomePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav />
-      <StylishHero>
-        <StylishTitle>Biometric authentication done right.</StylishTitle>
+      <main>
+        <Typography.Title>
+          Biometric authentication done right.
+        </Typography.Title>
         <p>
           Compared to conventional fingerprint authentication, vein pattern
           technology is more accurate, requires less maintenance, and is
@@ -26,20 +28,7 @@ export default function HomePage() {
           from physical locks to mobile apps. Ultimately, Infravenous makes
           cutting-edge biometric technology easily accessible and affordable.
         </p>
-        <Button type="internal" href="/signup">
-          Sign Up
-        </Button>
-        <Button type="internal" href="/signin">
-          Sign In
-        </Button>
-      </StylishHero>
+      </main>
     </div>
   );
 }
-const StylishHero = styled.main`
-  max-width: 1024px;
-  margin: 5rem auto;
-`;
-const StylishTitle = styled.h1`
-  font-size: 8rem;
-`;

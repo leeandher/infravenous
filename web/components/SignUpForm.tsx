@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
-import styled from "styled-components";
 import useForm from "../lib/useForm";
-import { CURRENT_USER_QUERY } from "./User";
+import { Form, Input, Button, Card } from "antd";
+import { CURRENT_USER_QUERY } from "../lib/useUser";
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -34,11 +34,16 @@ export default function SignUpForm() {
     resetForm();
   }
   return (
-    <StylishForm method="POST" onSubmit={handleSubmit}>
-      <fieldset>
-        <label htmlFor="name">
-          Name
-          <input
+    <Card title="Create an Account" hoverable>
+      <Form method="POST" onFinish={handleSubmit}>
+        <Form.Item
+          label="Name"
+          name="name"
+          htmlFor="name"
+          rules={[{ required: true, message: "Please input your name!" }]}
+          {...layout}
+        >
+          <Input
             name="name"
             type="text"
             placeholder="Your Name"
@@ -47,10 +52,18 @@ export default function SignUpForm() {
             value={inputs.name}
             onChange={handleChange}
           />
-        </label>
-        <label htmlFor="email">
+        </Form.Item>
+        <Form.Item
+          label="Email"
+          name="email"
+          htmlFor="email"
+          rules={[
+            { required: true, message: "Please input your email address!" },
+          ]}
+          {...layout}
+        >
           Email
-          <input
+          <Input
             name="email"
             type="email"
             placeholder="Your Email"
@@ -59,10 +72,16 @@ export default function SignUpForm() {
             value={inputs.email}
             onChange={handleChange}
           />
-        </label>
-        <label htmlFor="password">
+        </Form.Item>
+        <Form.Item
+          label="Password"
+          name="password"
+          htmlFor="password"
+          rules={[{ required: true, message: "Please input your password!" }]}
+          {...layout}
+        >
           Password
-          <input
+          <Input
             name="password"
             type="password"
             placeholder="Your Password"
@@ -71,16 +90,21 @@ export default function SignUpForm() {
             value={inputs.password}
             onChange={handleChange}
           />
-        </label>
-        <button type="submit">Sign In</button>
-      </fieldset>
-    </StylishForm>
+        </Form.Item>
+        <Form.Item {...tailLayout}>
+          <Button type="primary" htmlType="submit">
+            Register
+          </Button>
+        </Form.Item>
+      </Form>
+    </Card>
   );
 }
 
-const StylishForm = styled.form`
-  input,
-  label {
-    display: block;
-  }
-`;
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};

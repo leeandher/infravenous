@@ -1,5 +1,5 @@
 // @ts-nocheck
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 // Import styled components ServerStyleSheet
 import { ServerStyleSheet } from "styled-components";
 
@@ -22,7 +22,7 @@ class InfravenousDocument extends Document {
 
   render() {
     return (
-      <html>
+      <Html>
         <Head>
           {/* Step 5: Output the styles in the head */}
           {this.props.styleTags}
@@ -31,7 +31,7 @@ class InfravenousDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
