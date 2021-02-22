@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
-import { Form, Input, Button, Card } from "antd";
 import useForm from "../lib/useForm";
 import { CURRENT_USER_QUERY } from "../lib/useUser";
+import { Button, Input, Form, Card, HeadingText } from "./base";
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -34,52 +34,28 @@ export default function SignInForm() {
     resetForm();
   }
   return (
-    <Card title="Log In to your Account" hoverable>
-      <Form method="POST" onFinish={handleSubmit}>
-        <Form.Item
-          label="Email"
+    <Card>
+      <HeadingText>Log in</HeadingText>
+      <Form method="POST" onSubmit={handleSubmit}>
+        <Input
           name="email"
-          htmlFor="email"
-          rules={[
-            {
-              required: true,
-              message: "Please input your email address!",
-            },
-          ]}
-          {...layout}
-        >
-          <Input
-            name="email"
-            type="email"
-            placeholder="Your Email"
-            autoComplete="email"
-            // @ts-ignore
-            value={inputs.email}
-            onChange={handleChange}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Password"
+          type="email"
+          placeholder="Your Email"
+          autoComplete="email"
+          // @ts-ignore
+          value={inputs.email}
+          onChange={handleChange}
+        />
+        <Input
           name="password"
-          htmlFor="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
-          {...layout}
-        >
-          <Input
-            name="password"
-            type="password"
-            placeholder="Your Password"
-            autoComplete="password"
-            // @ts-ignore
-            value={inputs.password}
-            onChange={handleChange}
-          />
-        </Form.Item>
-        <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            Sign In
-          </Button>
-        </Form.Item>
+          type="password"
+          placeholder="Your Password"
+          autoComplete="password"
+          // @ts-ignore
+          value={inputs.password}
+          onChange={handleChange}
+        />
+        <Button type="submit">Sign In</Button>
       </Form>
     </Card>
   );

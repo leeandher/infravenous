@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Menu, Space, Button } from "antd";
 import { CURRENT_USER_QUERY, useUser } from "../lib/useUser";
 import { gql, useMutation } from "@apollo/client";
+import styled from "styled-components";
+import { Button } from "./base";
 
 const SIGNOUT_MUTATION = gql`
   mutation SIGNOUT_MUTATION {
@@ -21,11 +22,11 @@ function Nav() {
   }
 
   return (
-    <Menu mode="horizontal">
+    <div>
       <Link href="/">
-        <Button type="text">Infravenous</Button>
+        <Logo>Infravenous</Logo>
       </Link>
-      <Space style={{ float: "right", marginRight: "0.8rem" }}>
+      <>
         {!user ? (
           <>
             <Link href="/access">
@@ -36,11 +37,17 @@ function Nav() {
             </Link>
           </>
         ) : (
-          <Menu.Item onClick={handleSignOut}>Log Out</Menu.Item>
+          <Button onClick={handleSignOut}>Log Out</Button>
         )}
-      </Space>
-    </Menu>
+      </>
+    </div>
   );
 }
+
+const Logo = styled.p`
+  margin: 0;
+  font-weight: bold;
+  font-style: italic;
+`;
 
 export default Nav;

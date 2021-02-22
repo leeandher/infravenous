@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Nav from "../components/Nav";
-import { Layout, Row } from "antd";
 import SignInForm from "../components/SignInForm";
 import SignUpForm from "../components/SignUpForm";
+import styled from "styled-components";
 
 export default function SignInPage() {
   return (
@@ -12,14 +12,18 @@ export default function SignInPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav />
-      <main>
-        <Layout>
-          <Row justify="space-around" align="top">
-            <SignInForm />
-            <SignUpForm />
-          </Row>
-        </Layout>
-      </main>
+      <Layout>
+        <SignInForm />
+        <SignUpForm />
+      </Layout>
     </div>
   );
 }
+
+const Layout = styled.main`
+  display: flex;
+  background: #fff7f8;
+  padding: 5rem;
+  align-items: center;
+  justify-content: space-between;
+`;

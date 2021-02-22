@@ -1,8 +1,9 @@
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 import useForm from "../lib/useForm";
-import { Form, Input, Button, Card } from "antd";
 import { CURRENT_USER_QUERY } from "../lib/useUser";
+import styled from "styled-components";
+import { Card, Button, Input, Form, HeadingText } from "./base";
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -20,7 +21,7 @@ const SIGNUP_MUTATION = gql`
 
 export default function SignUpForm() {
   const { inputs, handleChange, resetForm } = useForm({
-    email: "lgrodrig@uwaterloo.ca",
+    email: "",
     name: "",
     password: "",
   });
@@ -34,77 +35,44 @@ export default function SignUpForm() {
     resetForm();
   }
   return (
-    <Card title="Create an Account" hoverable>
+    <Card>
       <Form method="POST" onFinish={handleSubmit}>
-        <Form.Item
-          label="Name"
+        <HeadingText>Create an account</HeadingText>
+        <Input
           name="name"
-          htmlFor="name"
-          rules={[{ required: true, message: "Please input your name!" }]}
-          {...layout}
-        >
-          <Input
-            name="name"
-            type="text"
-            placeholder="Your Name"
-            autoComplete="name"
-            // @ts-ignore
-            value={inputs.name}
-            onChange={handleChange}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Email"
+          type="text"
+          placeholder="Your Name"
+          autoComplete="name"
+          // @ts-ignore
+          value={inputs.name}
+          onChange={handleChange}
+        />
+        <Input
           name="email"
-          htmlFor="email"
-          rules={[
-            { required: true, message: "Please input your email address!" },
-          ]}
-          {...layout}
-        >
-          Email
-          <Input
-            name="email"
-            type="email"
-            placeholder="Your Email"
-            autoComplete="email"
-            // @ts-ignore
-            value={inputs.email}
-            onChange={handleChange}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Password"
+          type="email"
+          placeholder="Your Email"
+          autoComplete="email"
+          // @ts-ignore
+          value={inputs.email}
+          onChange={handleChange}
+        />
+        <Input
           name="password"
-          htmlFor="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
-          {...layout}
-        >
-          Password
-          <Input
-            name="password"
-            type="password"
-            placeholder="Your Password"
-            autoComplete="password"
-            // @ts-ignore
-            value={inputs.password}
-            onChange={handleChange}
-          />
-        </Form.Item>
-        <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            Register
-          </Button>
-        </Form.Item>
+          type="password"
+          placeholder="Your Password"
+          autoComplete="password"
+          // @ts-ignore
+          value={inputs.password}
+          onChange={handleChange}
+        />
+        <RightAlign>
+          <Button type="submit">Register</Button>
+        </RightAlign>
       </Form>
     </Card>
   );
 }
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
+const RightAlign = styled.div`
+  text-align: right;
+`;

@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { Button, Typography } from "antd";
 import Nav from "../components/Nav";
 import styled from "styled-components";
 
@@ -12,9 +11,7 @@ export default function HomePage() {
       </Head>
       <Nav />
       <main>
-        <Typography.Title>
-          Biometric authentication done right.
-        </Typography.Title>
+        <>Biometric authentication done right.</>
         <p>
           Compared to conventional fingerprint authentication, vein pattern
           technology is more accurate, requires less maintenance, and is
