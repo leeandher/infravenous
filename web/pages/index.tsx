@@ -1,31 +1,32 @@
-import Head from "next/head";
-import Nav from "../components/Nav";
 import styled from "styled-components";
+import { NavPage } from "../components/Page";
+import { BaseText, NavHero, TitleText } from "../components/base";
 
 export default function HomePage() {
   return (
-    <div>
-      <Head>
-        <title>Infravenous</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Nav />
-      <main>
-        <>Biometric authentication done right.</>
-        <p>
-          Compared to conventional fingerprint authentication, vein pattern
-          technology is more accurate, requires less maintenance, and is
-          unaffected by interference on the skin surface. Infravenous is a
-          versatile, compact, and cost-effective biometric authentication
-          device. To authenticate users, the device uses infrared light to image
-          their finger vein pattern. Our imaging processing pipeline then
-          extracts key features from the pattern and uses a machine learning
-          model to identify the user. This device can integrate with both
-          digital and physical systems, meaning Infravenous’ applications span
-          from physical locks to mobile apps. Ultimately, Infravenous makes
-          cutting-edge biometric technology easily accessible and affordable.
-        </p>
-      </main>
-    </div>
+    <NavPage>
+      <HomeHero>
+        <TitleText className="title">
+          Biometric authentication done right.
+        </TitleText>
+        <img src="/images/secure-login.svg" alt="secure login" />
+      </HomeHero>
+    </NavPage>
   );
 }
+
+const HomeHero = styled(NavHero)`
+  background: #ffffff;
+  align-items: flex-start;
+  justify-content: center;
+  .title {
+    text-align: right;
+    flex: 1;
+    max-width: 300px;
+    display: block;
+  }
+  img {
+    flex: 1;
+    max-height: 500px;
+  }
+`;

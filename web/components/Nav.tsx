@@ -14,7 +14,6 @@ const SIGNOUT_MUTATION = gql`
 function Nav() {
   const user = useUser();
   const router = useRouter();
-  console.log(router);
 
   const [signOut, { error, loading }] = useMutation(SIGNOUT_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
@@ -22,31 +21,26 @@ function Nav() {
 
   async function handleSignOut() {
     await signOut();
+    router.push("/");
   }
+
+  const isAuthenticated = !!user;
+  const isInAuthFlow = router.pathname.match(/^\/auth\//gm) !== null;
 
   return (
     <>
       <StylishNav>
-        {!user ? (
-          <Link href="/">
+        {isAuthenticated ? (
+          <Link href="/app/overview">
             <img src="/images/logo.png" alt="Infravenous" className="logo" />
           </Link>
         ) : (
-          <Link href="/app/overview">
+          <Link href="/">
             <img src="/images/logo.png" alt="Infravenous" className="logo" />
           </Link>
         )}
         <div className="items">
-          {!user ? (
-            <>
-              <Link href="/auth/signin">
-                <NavButton>Sign In</NavButton>
-              </Link>
-              <Link href="/auth/signup">
-                <NavButton className="primary">Sign Up</NavButton>
-              </Link>
-            </>
-          ) : (
+          {isAuthenticated ? (
             <>
               <Link href="/app/history">
                 <NavLink>History</NavLink>
@@ -57,10 +51,19 @@ function Nav() {
               <Link href="/app/profile">
                 <NavLink>Profile</NavLink>
               </Link>
-              <Link href="/">
-                <NavButton onClick={handleSignOut}>Log Out</NavButton>
-              </Link>
+              <NavButton onClick={handleSignOut}>Log Out</NavButton>
             </>
+          ) : (
+            !isInAuthFlow && (
+              <>
+                <Link href="/auth/signin">
+                  <NavButton>Sign In</NavButton>
+                </Link>
+                <Link href="/auth/signup">
+                  <NavButton className="primary">Sign Up</NavButton>
+                </Link>
+              </>
+            )
           )}
         </div>
       </StylishNav>
