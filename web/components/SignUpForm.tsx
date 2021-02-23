@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Card, Button, Input, Form, HeadingText } from "./base";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { RightAlign } from "./util";
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -94,8 +95,4 @@ const SubtitleText = styled.p`
     color: #ff988c;
     cursor: pointer;
   }
-`;
-
-const RightAlign = styled.div`
-  text-align: right;
 `;

@@ -6,6 +6,7 @@ import { Button, Input, Form, Card, HeadingText } from "./base";
 import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { RightAlign } from "./util";
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -85,8 +86,4 @@ const SubtitleText = styled.p`
     color: #ff988c;
     cursor: pointer;
   }
-`;
-
-const RightAlign = styled.div`
-  text-align: right;
 `;

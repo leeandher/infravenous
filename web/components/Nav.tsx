@@ -43,27 +43,36 @@ function Nav() {
           {isAuthenticated ? (
             <>
               <Link href="/app/history">
-                <NavLink>History</NavLink>
+                <Button className="small simple">History</Button>
               </Link>
               <Link href="/app/overview">
-                <NavLink>Overview</NavLink>
+                <Button className="small simple">Overview</Button>
               </Link>
               <Link href="/app/profile">
-                <NavLink>Profile</NavLink>
+                <Button className="small simple">Profile</Button>
               </Link>
-              <NavButton onClick={handleSignOut}>Log Out</NavButton>
+              <Button className="small" onClick={handleSignOut}>
+                Log Out
+              </Button>
+            </>
+          ) : !isInAuthFlow ? (
+            <>
+              <Link href="/about">
+                <Button className="small simple">About</Button>
+              </Link>
+              <Link href="/auth/signin">
+                <Button className="small">Sign In</Button>
+              </Link>
+              <Link href="/auth/signup">
+                <Button className="small primary">Sign Up</Button>
+              </Link>
             </>
           ) : (
-            !isInAuthFlow && (
-              <>
-                <Link href="/auth/signin">
-                  <NavButton>Sign In</NavButton>
-                </Link>
-                <Link href="/auth/signup">
-                  <NavButton className="primary">Sign Up</NavButton>
-                </Link>
-              </>
-            )
+            <>
+              <Link href="/about">
+                <Button className="small simple">About</Button>
+              </Link>
+            </>
           )}
         </div>
       </StylishNav>
@@ -89,23 +98,6 @@ const StylishNav = styled.nav`
   .items {
     display: flex;
     justify-content: flex-end;
-  }
-`;
-
-const NavButton = styled(Button)`
-  margin: 1rem 2rem 1rem 0;
-  &.primary {
-    background: #ffa69e;
-    color: #ffffff;
-  }
-`;
-
-const NavLink = styled(Button)`
-  margin: 1rem 2rem 1rem 0;
-  background: transparent;
-  border-radius: 0px;
-  &:hover {
-    box-shadow: 0 0.25rem #ff7e6b;
   }
 `;
 

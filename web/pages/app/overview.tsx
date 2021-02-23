@@ -2,19 +2,15 @@ import styled from "styled-components";
 import { NavPage } from "../../components/Page";
 import { Card, HeadingText } from "../../components/base";
 
+import AttemptList from "../../components/AttemptList";
+
 export default function OverviewPage() {
   return (
     <NavPage>
       <Layout>
         <Card className="item attempts">
           <HeadingText>Recent login attempts</HeadingText>
-          <ul>
-            <li>test login 1</li>
-            <li>test login 2</li>
-            <li>test login 3</li>
-            <li>test login 4</li>
-            <li>test login 5</li>
-          </ul>
+          <AttemptList />
         </Card>
         <Card className="item devices">
           <HeadingText>Manage your devices</HeadingText>
