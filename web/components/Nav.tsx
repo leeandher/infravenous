@@ -30,23 +30,17 @@ function Nav() {
   return (
     <>
       <StylishNav>
-        {isAuthenticated ? (
-          <Link href="/app/overview">
-            <img src="/images/logo.png" alt="Infravenous" className="logo" />
-          </Link>
-        ) : (
-          <Link href="/">
-            <img src="/images/logo.png" alt="Infravenous" className="logo" />
-          </Link>
-        )}
+        <Link href="/">
+          <img src="/images/logo.png" alt="Infravenous" className="logo" />
+        </Link>
         <div className="items">
           {isAuthenticated ? (
             <>
-              <Link href="/app/history">
-                <Button className="small simple">History</Button>
-              </Link>
               <Link href="/app/overview">
                 <Button className="small simple">Overview</Button>
+              </Link>
+              <Link href="/app/history">
+                <Button className="small simple">History</Button>
               </Link>
               <Link href="/app/profile">
                 <Button className="small simple">Profile</Button>

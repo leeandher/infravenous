@@ -1,37 +1,35 @@
+import Link from "next/link";
 import styled from "styled-components";
 import AttemptListItem, { Result } from "./AttemptListItem";
-import { Button } from "./base";
+import { Button, List } from "./base";
 import { RightAlign } from "./util";
 
 const fakeProps = {
-  confidence: "0.9",
+  confidence: "95",
   result: Result.ACCEPT,
-  deviceName: "Device #00",
-  time: "1614115520054",
-  deviceId: "601ee91c51a7905d4c421269",
+  deviceName: "Leander's Infravenous Device #00",
+  time: "6:45 PM EST - December 25, 2020",
 };
 
 function AttemptList() {
-  const attmemptsToDisplay = [1, 2, 3, 4, 5];
+  const attemptList = [1, 2, 3, 4, 5];
   return (
-    <StylishAttemptList>
-      {attmemptsToDisplay.map((_item, index) => {
+    <List>
+      {attemptList.map((_item, index) => {
         return (
-          <>
-            <AttemptListItem {...fakeProps} />
-            {index !== attmemptsToDisplay.length - 1 && <hr />}
-          </>
+          <AttemptListItem
+            {...fakeProps}
+            hasBreak={index !== attemptList.length - 1}
+          />
         );
       })}
       <RightAlign>
-        <Button className="small">View more</Button>
+        <Link href="/app/history">
+          <Button className="small">View more</Button>
+        </Link>
       </RightAlign>
-    </StylishAttemptList>
+    </List>
   );
 }
-
-const StylishAttemptList = styled.ul`
-  padding: 0;
-`;
 
 export default AttemptList;
