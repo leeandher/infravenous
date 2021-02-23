@@ -3,6 +3,9 @@ import gql from "graphql-tag";
 import useForm from "../lib/useForm";
 import { CURRENT_USER_QUERY } from "../lib/useUser";
 import { Button, Input, Form, Card, HeadingText } from "./base";
+import styled from "styled-components";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -21,21 +24,29 @@ const SIGNIN_MUTATION = gql`
 `;
 
 export default function SignInForm() {
-  const { inputs, handleChange, resetForm } = useForm({
+  const { inputs, handleChange } = useForm({
     email: "",
     password: "",
   });
+  const router = useRouter();
   const [signIn, { error, loading }] = useMutation(SIGNIN_MUTATION, {
     variables: inputs,
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault();
     await signIn();
-    resetForm();
+    router.push("/app/overview");
   }
   return (
     <Card>
       <HeadingText>Log in</HeadingText>
+      <SubtitleText>
+        or{` `}
+        <Link href="/auth/signup">
+          <span className="pinkLink">create an account</span>
+        </Link>
+      </SubtitleText>
       <Form method="POST" onSubmit={handleSubmit}>
         <Input
           name="email"
@@ -45,6 +56,7 @@ export default function SignInForm() {
           // @ts-ignore
           value={inputs.email}
           onChange={handleChange}
+          required
         />
         <Input
           name="password"
@@ -54,17 +66,27 @@ export default function SignInForm() {
           // @ts-ignore
           value={inputs.password}
           onChange={handleChange}
+          required
         />
-        <Button type="submit">Sign In</Button>
+        <RightAlign>
+          <Button type="submit" className="primary">
+            Sign In
+          </Button>
+        </RightAlign>
       </Form>
     </Card>
   );
 }
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
+// TODO: Remove duplicate code here and in SignUpForm
+const SubtitleText = styled.p`
+  margin: 0;
+  .pinkLink {
+    color: #ff988c;
+    cursor: pointer;
+  }
+`;
+
+const RightAlign = styled.div`
+  text-align: right;
+`;

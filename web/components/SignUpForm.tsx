@@ -4,6 +4,8 @@ import useForm from "../lib/useForm";
 import { CURRENT_USER_QUERY } from "../lib/useUser";
 import styled from "styled-components";
 import { Card, Button, Input, Form, HeadingText } from "./base";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -20,24 +22,31 @@ const SIGNUP_MUTATION = gql`
 `;
 
 export default function SignUpForm() {
-  const { inputs, handleChange, resetForm } = useForm({
+  const { inputs, handleChange } = useForm({
     email: "",
     name: "",
     password: "",
   });
+  const router = useRouter();
   const [signUp, { error, loading }] = useMutation(SIGNUP_MUTATION, {
     variables: inputs,
-    // refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
   async function handleSubmit(e) {
     e.preventDefault();
     await signUp();
-    resetForm();
+    router.push("/app/overview");
   }
   return (
     <Card>
       <Form method="POST" onFinish={handleSubmit}>
         <HeadingText>Create an account</HeadingText>
+        <SubtitleText>
+          or{` `}
+          <Link href="/auth/signin">
+            <span className="pinkLink">login to an existing account</span>
+          </Link>
+        </SubtitleText>
         <Input
           name="name"
           type="text"
@@ -46,6 +55,7 @@ export default function SignUpForm() {
           // @ts-ignore
           value={inputs.name}
           onChange={handleChange}
+          required
         />
         <Input
           name="email"
@@ -55,6 +65,7 @@ export default function SignUpForm() {
           // @ts-ignore
           value={inputs.email}
           onChange={handleChange}
+          required
         />
         <Input
           name="password"
@@ -64,14 +75,26 @@ export default function SignUpForm() {
           // @ts-ignore
           value={inputs.password}
           onChange={handleChange}
+          required
         />
         <RightAlign>
-          <Button type="submit">Register</Button>
+          <Button type="submit" className="primary">
+            Register
+          </Button>
         </RightAlign>
       </Form>
     </Card>
   );
 }
+
+// TODO: Remove duplicate code here and in SignInForm
+const SubtitleText = styled.p`
+  margin: 0;
+  .pinkLink {
+    color: #ff988c;
+    cursor: pointer;
+  }
+`;
 
 const RightAlign = styled.div`
   text-align: right;

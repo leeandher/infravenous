@@ -1,12 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap");
+
 html,
 body {
+  height: 100%;
   font-size: 10px;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
 }
 
+/* Allow for height:100% in Next.js Apps */
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+  height: 100%;
+}
+
+* {
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+}
 body {
   margin: 0 auto;
   font-size: 1.75rem;
