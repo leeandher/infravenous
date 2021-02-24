@@ -4,6 +4,7 @@ import { Card, HeadingText } from "../../components/base";
 
 import AttemptList from "../../components/AttemptList";
 import DeviceList from "../../components/DeviceList";
+import ProfilePreview from "../../components/ProfilePreview";
 
 export default function OverviewPage() {
   return (
@@ -12,7 +13,7 @@ export default function OverviewPage() {
         <div className="wrapper">
           <Card className="item attempts">
             <HeadingText>Recent login attempts</HeadingText>
-            <AttemptList />
+            <AttemptList length={5} />
           </Card>
           <div className="item other">
             <Card className="other-item devices">
@@ -21,13 +22,7 @@ export default function OverviewPage() {
             </Card>
             <Card className="other-item profile">
               <HeadingText>Your Profile</HeadingText>
-              <ul>
-                <li>test login 1</li>
-                <li>test login 2</li>
-                <li>test login 3</li>
-                <li>test login 4</li>
-                <li>test login 5</li>
-              </ul>
+              <ProfilePreview />
             </Card>
           </div>
         </div>

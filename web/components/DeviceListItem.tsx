@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Break, Button } from "./base";
-import { FaUsb } from "react-icons/fa";
+import { FaPencilAlt, FaUsb } from "react-icons/fa";
 
 interface DeviceListItemProps {
   name: string;
@@ -27,8 +27,10 @@ function DeviceListItem({
           <p className="info">Last Used: {lastUsed}</p>
         </div>
         {/* TODO: Add the management stuff */}
-        <div className="button-wrapper">
-          <Button className="small">Manage</Button>
+        <div>
+          <Button>
+            <FaPencilAlt />
+          </Button>
         </div>
       </StylishDeviceListItem>
       {hasBreak && <Break />}
@@ -40,10 +42,10 @@ const StylishDeviceListItem = styled.li`
   display: grid;
   grid-template-columns: 3rem auto 1fr;
   column-gap: 2rem;
+  justify-items: flex-end;
+  align-items: center;
   list-style: none;
   padding: 1.5rem 0;
-  align-items: center;
-  justify-items: center;
   .icon {
     color: #828282;
     font-size: 3rem;

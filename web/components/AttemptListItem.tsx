@@ -52,21 +52,19 @@ const StylishAttemptListItem = styled.li`
   column-gap: 2rem;
   list-style: none;
   padding: 1.5rem 0;
+  align-items: center;
   .icon {
     color: #2fda90;
     font-size: 3rem;
     display: inline-block;
-    align-self: center;
     line-height: 0;
   }
   .data {
     display: inline-block;
   }
-
   .result {
     display: flex;
     font-weight: bold;
-    align-items: center;
     .result-text {
       color: #2fda90;
       margin: 0;

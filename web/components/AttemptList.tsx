@@ -11,23 +11,26 @@ const fakeProps = {
   time: "6:45 PM EST - December 25, 2020",
 };
 
-function AttemptList() {
-  const attemptList = [1, 2, 3, 4, 5];
+function AttemptList({ length, hideButton = false }) {
+  const attemptList = Array(length).fill(0);
   return (
     <List>
       {attemptList.map((_item, index) => {
         return (
           <AttemptListItem
+            key={index}
             {...fakeProps}
             hasBreak={index !== attemptList.length - 1}
           />
         );
       })}
-      <RightAlign>
-        <Link href="/app/history">
-          <Button className="small">View more</Button>
-        </Link>
-      </RightAlign>
+      {hideButton ? null : (
+        <RightAlign>
+          <Link href="/app/history">
+            <Button>View more</Button>
+          </Link>
+        </RightAlign>
+      )}
     </List>
   );
 }

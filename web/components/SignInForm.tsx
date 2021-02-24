@@ -8,8 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { RightAlign } from "./util";
 
-const SIGNIN_MUTATION = gql`
-  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
+const AUTHENTICATE_USER_MUTATION = gql`
+  mutation AUTHENTICATE_USER_MUTATION($email: String!, $password: String!) {
     authenticateUserWithPassword(email: $email, password: $password) {
       ... on UserAuthenticationWithPasswordSuccess {
         item {
@@ -30,7 +30,7 @@ export default function SignInForm() {
     password: "",
   });
   const router = useRouter();
-  const [signIn, { error, loading }] = useMutation(SIGNIN_MUTATION, {
+  const [signIn, { error, loading }] = useMutation(AUTHENTICATE_USER_MUTATION, {
     variables: inputs,
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
@@ -54,6 +54,7 @@ export default function SignInForm() {
           type="email"
           placeholder="Your Email"
           autoComplete="email"
+          label="Email"
           // @ts-ignore
           value={inputs.email}
           onChange={handleChange}
@@ -64,6 +65,7 @@ export default function SignInForm() {
           type="password"
           placeholder="Your Password"
           autoComplete="password"
+          label="Password"
           // @ts-ignore
           value={inputs.password}
           onChange={handleChange}

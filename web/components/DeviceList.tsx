@@ -15,6 +15,7 @@ function AttemptList() {
       {deviceList.map((_item, index) => {
         return (
           <DeviceListItem
+            key={index}
             {...fakeProps}
             hasBreak={index !== deviceList.length - 1}
           />

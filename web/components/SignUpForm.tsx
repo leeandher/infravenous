@@ -8,8 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { RightAlign } from "./util";
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION(
+const CREATE_USER_MUTATION = gql`
+  mutation CREATE_USER_MUTATION(
     $email: String!
     $name: String!
     $password: String!
@@ -29,7 +29,7 @@ export default function SignUpForm() {
     password: "",
   });
   const router = useRouter();
-  const [signUp, { error, loading }] = useMutation(SIGNUP_MUTATION, {
+  const [signUp, { error, loading }] = useMutation(CREATE_USER_MUTATION, {
     variables: inputs,
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
@@ -40,7 +40,7 @@ export default function SignUpForm() {
   }
   return (
     <Card>
-      <Form method="POST" onFinish={handleSubmit}>
+      <Form method="POST" onSubmit={handleSubmit}>
         <HeadingText>Create an account</HeadingText>
         <SubtitleText>
           or{` `}
@@ -53,6 +53,7 @@ export default function SignUpForm() {
           type="text"
           placeholder="Your Name"
           autoComplete="name"
+          label="Name"
           // @ts-ignore
           value={inputs.name}
           onChange={handleChange}
@@ -63,6 +64,7 @@ export default function SignUpForm() {
           type="email"
           placeholder="Your Email"
           autoComplete="email"
+          label="Email"
           // @ts-ignore
           value={inputs.email}
           onChange={handleChange}
@@ -73,6 +75,7 @@ export default function SignUpForm() {
           type="password"
           placeholder="Your Password"
           autoComplete="password"
+          label="Password"
           // @ts-ignore
           value={inputs.password}
           onChange={handleChange}
