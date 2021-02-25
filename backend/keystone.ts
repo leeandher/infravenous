@@ -1,31 +1,31 @@
-import { Attempt } from './schema/Attempt'
-import { Device } from './schema/Device'
-import { User } from './schema/User'
-import { createAuth } from '@keystone-next/auth'
-import { config, createSchema } from '@keystone-next/keystone/schema'
+import { Attempt } from "./schema/Attempt";
+import { Device } from "./schema/Device";
+import { User } from "./schema/User";
+import { createAuth } from "@keystone-next/auth";
+import { config, createSchema } from "@keystone-next/keystone/schema";
 import {
   withItemData,
   statelessSessions,
-} from '@keystone-next/keystone/session'
-import 'dotenv/config'
+} from "@keystone-next/keystone/session";
+import "dotenv/config";
 
 const databaseUrl =
-  process.env.DATABASE_URL || 'mongodb://localhost/infravenous'
+  process.env.DATABASE_URL || "mongodb://localhost/infravenous";
 
 const sessionConfig = {
   maxAge: 60 * 60 * 24,
   secret: process.env.COOKIE_SECRET,
-}
+};
 
 const { withAuth } = createAuth({
-  listKey: 'User',
-  identityField: 'email',
-  secretField: 'password',
+  listKey: "User",
+  identityField: "email",
+  secretField: "password",
   initFirstItem: {
-    fields: ['name', 'email', 'password'],
+    fields: ["name", "email", "password"],
     // TODO: Add roles here
   },
-})
+});
 
 export default withAuth(
   config({
@@ -36,7 +36,7 @@ export default withAuth(
       },
     },
     db: {
-      adapter: 'mongoose',
+      adapter: "mongoose",
       url: databaseUrl,
     },
     lists: createSchema({
@@ -50,7 +50,7 @@ export default withAuth(
       isAccessAllowed: ({ session }) => !!session?.data,
     },
     session: withItemData(statelessSessions(sessionConfig), {
-      User: 'id',
+      User: "id",
     }),
   })
-)
+);

@@ -1,24 +1,19 @@
-import { list } from '@keystone-next/keystone/schema'
-import { password, relationship, text, timestamp } from '@keystone-next/fields'
+import { list } from "@keystone-next/keystone/schema";
+import { password, relationship, text, timestamp } from "@keystone-next/fields";
 
 export const User = list({
   fields: {
     name: text({ isRequired: true }),
     email: text({ isRequired: true, isUnique: true }),
     password: password(),
+    createdAt: timestamp({ isRequired: true }),
     devices: relationship({
-      ref: 'Device.users',
+      ref: "Device.users",
       many: true,
-      ui: {
-        itemView: { fieldMode: 'edit' },
-      },
     }),
     attempts: relationship({
-      ref: 'Attempt.user',
-      many: false,
-      ui: {
-        itemView: { fieldMode: 'edit' },
-      },
+      ref: "Attempt.user",
+      many: true,
     }),
   },
-})
+});
