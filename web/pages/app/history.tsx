@@ -10,7 +10,7 @@ export default function HistoryPage() {
       <NavHero>
         <Card className="item-full">
           <HeadingText>Authentication History</HeadingText>
-          <AttemptList length={20} hideButton />
+          <AttemptList hideButton />
         </Card>
       </NavHero>
     </NavPage>

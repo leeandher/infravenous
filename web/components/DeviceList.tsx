@@ -8,7 +8,7 @@ const fakeProps = {
   lastUsed: "6:45 PM EST - December 25, 2020",
 };
 
-function AttemptList() {
+function DeviceList() {
   const deviceList = [1, 2];
   return (
     <List>
@@ -25,4 +25,4 @@ function AttemptList() {
   );
 }
 
-export default AttemptList;
+export default DeviceList;

@@ -4,8 +4,8 @@ import { Break } from "./base";
 
 // TODO: Share this type in the backend
 export enum Result {
-  ACCEPT,
-  REJECT,
+  Success = "Success",
+  Failure = "Failure",
 }
 
 interface AttemptListItemProps {
@@ -23,16 +23,18 @@ function AttemptListItem({
   result,
   hasBreak,
 }: AttemptListItemProps) {
+  //TODO: Connect to the backend to share types (if we update the text in the DB, this will break)
+  const isSuccess = result === Result.Success;
   return (
     <>
       <StylishAttemptListItem>
-        <div className="icon">
-          <FaCheckCircle />
+        <div className={isSuccess ? "icon" : "icon red"}>
+          {isSuccess ? <FaCheckCircle /> : <FaTimesCircle />}
         </div>
         <div className="data">
           <div className="result">
-            <p className="result-text">
-              {Result[result]}
+            <p className={isSuccess ? "result-text" : "result-text red"}>
+              {result}
               {` `}
               <span className="result-confidence">({confidence}%)</span>
             </p>
@@ -58,6 +60,9 @@ const StylishAttemptListItem = styled.li`
     font-size: 3rem;
     display: inline-block;
     line-height: 0;
+    &.red {
+      color: #ff6565;
+    }
   }
   .data {
     display: inline-block;
@@ -68,10 +73,12 @@ const StylishAttemptListItem = styled.li`
     .result-text {
       color: #2fda90;
       margin: 0;
+      &.red {
+        color: #ff6565;
+      }
     }
     .result-confidence {
       color: #828282;
-      margin: 0;
     }
   }
   .device {

@@ -13,7 +13,7 @@ export default function OverviewPage() {
         <div className="wrapper">
           <Card className="item attempts">
             <HeadingText>Recent login attempts</HeadingText>
-            <AttemptList length={5} />
+            <AttemptList size={5} />
           </Card>
           <div className="item other">
             <Card className="other-item devices">

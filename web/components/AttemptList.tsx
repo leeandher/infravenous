@@ -1,25 +1,54 @@
 import Link from "next/link";
-import styled from "styled-components";
+import Loading from "./Loading";
 import AttemptListItem, { Result } from "./AttemptListItem";
 import { Button, List } from "./base";
 import { RightAlign } from "./util";
+import { gql, useQuery } from "@apollo/client";
+import { useUser } from "../lib/useUser";
 
-const fakeProps = {
-  confidence: "95",
-  result: Result.ACCEPT,
-  deviceName: "Leander's Infravenous Device #00",
-  time: "6:45 PM EST - December 25, 2020",
-};
+const ATTEMPT_LIST_QUERY = gql`
+  query ATTEMPT_LIST_QUERY($userId: ID!) {
+    allAttempts(where: { user: { id: $userId } }, sortBy: scanTime_DESC) {
+      confidence
+      device {
+        name
+      }
+      result
+      scanTime
+    }
+  }
+`;
 
-function AttemptList({ length, hideButton = false }) {
-  const attemptList = Array(length).fill(0);
+interface AttemptListProps {
+  size?: number;
+  hideButton?: boolean;
+}
+
+function AttemptList({ size = null, hideButton = false }: AttemptListProps) {
+  const user = useUser();
+  const { data, loading, error } = useQuery(ATTEMPT_LIST_QUERY, {
+    variables: {
+      userId: user?.id,
+    },
+  });
+  if (loading || error) return <Loading />;
+
+  let { allAttempts: attemptList } = data;
+  if (size) attemptList = attemptList.slice(0, size);
+
   return (
     <List>
-      {attemptList.map((_item, index) => {
+      {attemptList.map((attemptItem, index) => {
+        const listItemProps = {
+          confidence: attemptItem?.confidence,
+          time: attemptItem?.scanTime,
+          deviceName: attemptItem?.device?.name,
+          result: attemptItem?.result,
+        };
         return (
           <AttemptListItem
             key={index}
-            {...fakeProps}
+            {...listItemProps}
             hasBreak={index !== attemptList.length - 1}
           />
         );

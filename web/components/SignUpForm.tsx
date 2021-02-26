@@ -1,5 +1,4 @@
-import { useMutation } from "@apollo/client";
-import gql from "graphql-tag";
+import { gql, useMutation } from "@apollo/client";
 import useForm from "../lib/useForm";
 import { CURRENT_USER_QUERY } from "../lib/useUser";
 import styled from "styled-components";
