@@ -1,22 +1,47 @@
-import styled from "styled-components";
 import DeviceListItem from "./DeviceListItem";
 import { List } from "./base";
+import { gql, useQuery } from "@apollo/client";
+import { useUser } from "../lib/useUser";
+import Loading from "./Loading";
+import { baseLong } from "../lib/formatDate";
 
-const fakeProps = {
-  name: "Leander's Infravenous Device #00",
-  description: "Office device, shared",
-  lastUsed: "6:45 PM EST - December 25, 2020",
-};
+const DEVICE_LIST_QUERY = gql`
+  query DEVICE_LIST_QUERY($userId: ID!) {
+    allDevices(where: { users_some: { id: $userId } }) {
+      name
+      description
+      attempts(sortBy: scanTime_DESC, first: 1) {
+        scanTime
+      }
+    }
+  }
+`;
 
 function DeviceList() {
-  const deviceList = [1, 2];
+  const user = useUser();
+  const { data, loading, error } = useQuery(DEVICE_LIST_QUERY, {
+    variables: { userId: user?.id },
+  });
+  if (loading || error) return <Loading />;
+  console.log(data);
+  let { allDevices: deviceList } = data;
+
   return (
     <List>
-      {deviceList.map((_item, index) => {
+      {deviceList.map((deviceItem, index) => {
+        let lastUsed = deviceItem?.attempts[0]?.scanTime;
+        if (lastUsed) {
+          lastUsed = baseLong(new Date(lastUsed));
+        }
+        const deviceListItemProps = {
+          name: deviceItem?.name,
+          description: deviceItem?.description,
+          lastUsed: lastUsed ?? "Never",
+        };
         return (
           <DeviceListItem
             key={index}
-            {...fakeProps}
+            {...deviceListItemProps}
             hasBreak={index !== deviceList.length - 1}
           />
         );

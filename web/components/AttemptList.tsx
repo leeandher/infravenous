@@ -5,6 +5,7 @@ import { Button, List } from "./base";
 import { RightAlign } from "./util";
 import { gql, useQuery } from "@apollo/client";
 import { useUser } from "../lib/useUser";
+import { baseLong } from "../lib/formatDate";
 
 const ATTEMPT_LIST_QUERY = gql`
   query ATTEMPT_LIST_QUERY($userId: ID!) {
@@ -39,16 +40,16 @@ function AttemptList({ size = null, hideButton = false }: AttemptListProps) {
   return (
     <List>
       {attemptList.map((attemptItem, index) => {
-        const listItemProps = {
+        const attemptListItemProps = {
           confidence: attemptItem?.confidence,
-          time: attemptItem?.scanTime,
+          time: baseLong(new Date(attemptItem?.scanTime)),
           deviceName: attemptItem?.device?.name,
           result: attemptItem?.result,
         };
         return (
           <AttemptListItem
             key={index}
-            {...listItemProps}
+            {...attemptListItemProps}
             hasBreak={index !== attemptList.length - 1}
           />
         );

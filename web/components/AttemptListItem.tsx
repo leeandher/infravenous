@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { Break } from "./base";
 
-// TODO: Share this type in the backend
+//TODO: Connect to the backend to share types (if we update the text in the DB, this will break)
 export enum Result {
   Success = "Success",
   Failure = "Failure",
@@ -23,7 +23,6 @@ function AttemptListItem({
   result,
   hasBreak,
 }: AttemptListItemProps) {
-  //TODO: Connect to the backend to share types (if we update the text in the DB, this will break)
   const isSuccess = result === Result.Success;
   return (
     <>
