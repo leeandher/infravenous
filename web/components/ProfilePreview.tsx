@@ -2,17 +2,40 @@ import styled from "styled-components";
 import { useUser } from "../lib/useUser";
 import Link from "next/link";
 import { Button } from "./base";
+import { gql, useQuery } from "@apollo/client";
+import Loading from "./Loading";
+
+const USER_PROFILE_QUERY = gql`
+  query USER_PROFILE_QUERY {
+    authenticatedItem {
+      ... on User {
+        email
+        name
+        _attemptsMeta {
+          count
+        }
+      }
+    }
+  }
+`;
 
 function ProfilePreview() {
-  const user = useUser();
-  return (
+  const { data, loading, error } = useQuery(USER_PROFILE_QUERY);
+  const user = {
+    name: data?.authenticatedItem?.name,
+    email: data?.authenticatedItem?.email,
+    authCount: data?.authenticatedItem?._attemptsMeta?.count,
+  };
+  return loading || error ? (
+    <Loading />
+  ) : (
     <StylishProfilePreview>
       <img src="/images/avatar-m.png" alt="default avatar" className="avatar" />
       <div className="info">
         <p className="name">{user?.name}</p>
         <p className="email">{user?.email}</p>
         <p>
-          Times Scanned: <span className="authCount">251</span>
+          Times Scanned: <span className="authCount">{user?.authCount}</span>
         </p>
       </div>
       <div>

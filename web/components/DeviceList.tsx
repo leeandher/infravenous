@@ -23,7 +23,6 @@ function DeviceList() {
     variables: { userId: user?.id },
   });
   if (loading || error) return <Loading />;
-  console.log(data);
   let { allDevices: deviceList } = data;
 
   return (
