@@ -1,3 +1,4 @@
 {
-  "python.pythonPath": "device\\iv-venv\\Scripts\\python.exe"
+  "python.pythonPath": "device\\iv-venv\\Scripts\\python.exe",
+  "python.formatting.provider": "black"
 }
