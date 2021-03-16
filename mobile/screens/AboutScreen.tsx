@@ -1,17 +1,16 @@
-import { Ionicons } from "@expo/vector-icons";
+// import { Ionicons } from "react-native-vector-icons/dist/lib";
 import * as React from "react";
 import { StyleSheet } from "react-native";
 
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 
 export default function AboutScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.horizContainer}>
-        <Ionicons name="card-outline" size={60} color="black" />
+        {/* <Ionicons name="card-outline" size={60} color="black" />
         <Ionicons name="cash-outline" size={60} color="black" />
-        <Ionicons name="wallet-outline" size={60} color="black" />
+        <Ionicons name="wallet-outline" size={60} color="black" /> */}
       </View>
       <Text style={styles.title}>Welcome to QNC Bank</Text>
       <View

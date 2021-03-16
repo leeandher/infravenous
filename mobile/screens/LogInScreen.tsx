@@ -1,13 +1,28 @@
 import * as React from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
+import { useQuery, gql } from "@apollo/client";
 
 import { Text, View } from "../components/Themed";
+
+const TEST_QUERY = gql`
+  query TEST_QUERY {
+    _allAttemptsMeta {
+      count
+    }
+  }
+`;
 
 export default function LogInScreen() {
   const [email, onChangeEmail] = React.useState("");
   const [password, onChangePassword] = React.useState("");
-  function placeholder() {}
+
+  const { loading, error, data } = useQuery(TEST_QUERY);
+  console.log(data);
+  function handlePress() {
+    console.log(data);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Log In</Text>
@@ -26,7 +41,7 @@ export default function LogInScreen() {
         value={password}
         placeholder="e.g. hunter2"
       />
-      <Pressable style={styles.button} onPress={placeholder}>
+      <Pressable style={styles.button} onPress={handlePress}>
         <Text style={styles.buttonText}>Log In</Text>
       </Pressable>
     </View>
