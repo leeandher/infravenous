@@ -25,7 +25,6 @@ class InfravenousDocument extends Document {
       <Html>
         <Head>
           {/* Step 5: Output the styles in the head */}
-          <title>Infravenous</title>
           <link rel="icon" href="/favicon.ico" />
           {this.props.styleTags}
         </Head>

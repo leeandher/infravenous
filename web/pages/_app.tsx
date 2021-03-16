@@ -5,12 +5,18 @@ import "antd/dist/antd.css";
 
 import { ApolloProvider } from "@apollo/client";
 import withData from "../lib/withData";
+import Head from "next/head";
 
 function InfravenousApp({ Component, pageProps, apollo: client }) {
   return (
-    <ApolloProvider client={client}>
-      <Component {...pageProps} />
-    </ApolloProvider>
+    <>
+      <Head>
+        <title>Infravenous</title>
+      </Head>
+      <ApolloProvider client={client}>
+        <Component {...pageProps} />
+      </ApolloProvider>
+    </>
   );
 }
 
