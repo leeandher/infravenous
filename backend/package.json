@@ -8,7 +8,9 @@
   "homepage": "https://github.com/leeandher/infravenous",
   "license": "MIT",
   "scripts": {
-    "dev": "keystone-next"
+    "dev": "keystone-next",
+    "start": "keystone-next",
+    "deploy": "git subtree push --prefix backend heroku master"
   },
   "dependencies": {
     "@keystone-next/admin-ui": "^8.0.1",
