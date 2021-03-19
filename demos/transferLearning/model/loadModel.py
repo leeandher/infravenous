@@ -41,7 +41,7 @@ num_channel = 1
 num_epoch = 200
 
 #Define number of classes
-num_classes = 492
+num_classes = 500
 
 img_data_list=[]
 labels_list = []
