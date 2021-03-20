@@ -2,6 +2,7 @@ import os
 import random
 from dotenv import load_dotenv
 from archivist import archive_attempt
+from analyst import authenticate
 
 # Load the environment variables
 load_dotenv()
