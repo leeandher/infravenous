@@ -201,6 +201,7 @@ print (test_image.shape)
 
 # print(model.predict(test_image))
 # print(model.predict_classes(test_image))
+print(model.predict(test_image))
 print("------------")
 print(np.argmax(model.predict(test_image), axis=-1))
 print("------------")

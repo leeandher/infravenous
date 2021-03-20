@@ -1,4 +1,5 @@
 {
   "python.pythonPath": "device\\iv-venv\\Scripts\\python.exe",
-  "python.formatting.provider": "black"
+  "python.formatting.provider": "black",
+  "git.ignoreLimitWarning": true
 }

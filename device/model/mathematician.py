@@ -52,7 +52,7 @@ labels_list = []
 
 for dataset in data_dir_list:
     img_list = os.listdir(data_path + "/" + dataset)
-    print("Loading the images of dataset-" + "{}\n".format(dataset))
+    # print("Loading the images of dataset-" + "{}\n".format(dataset))
     label = labels_name[dataset]
     for img in img_list:
         if str(img)[-3:] == "jpg":
@@ -68,35 +68,35 @@ img_data = np.array(img_data_list)
 img_data = img_data.astype("float32")
 img_data /= 255
 
-print(img_data.shape)
+# print(img_data.shape)
 
 labels = np.array(labels_list)
 
 # print the count of number of samples for different classes
-print(np.unique(labels, return_counts=True))
+# print(np.unique(labels, return_counts=True))
 
 if num_channel == 1:
     if K.image_data_format() == "th":
         img_data = np.expand_dims(img_data, axis=1)
-        print(img_data.shape)
+        # print(img_data.shape)
     else:
         img_data = np.expand_dims(img_data, axis=(4, 0))
-        print(img_data.shape)
+        # print(img_data.shape)
 
 else:
     if K.image_dim_ordering() == "th":
         img_data = np.rollaxis(img_data, 3, 1)
-        print(img_data.shape)
+        # print(img_data.shape)
 
 img_data = img_data[0]
 
 # Convert class labels to on-hot encoding
 Y = np_utils.to_categorical(labels, num_classes)
 
-print("image_data.\n")
-print(img_data.shape)
-print("Y.shape\n")
-print(Y.shape)
+# print("image_data.\n")
+# print(img_data.shape)
+# print("Y.shape\n")
+# print(Y.shape)
 
 
 # Shuffle the dataset
@@ -105,8 +105,8 @@ x, y = shuffle(img_data, Y, random_state=2)
 # Split the dataset
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=2)
 
-print("X_train shape = {}".format(X_train.shape))
-print("X_test shape = {}".format(X_test.shape))
+# print("X_train shape = {}".format(X_train.shape))
+# print("X_test shape = {}".format(X_test.shape))
 
 # Shuffle the dataset
 x, y = shuffle(img_data, Y, random_state=2)
@@ -121,7 +121,7 @@ image = X_train[2230, :].reshape((300, 100))
 
 # Initializing the input shape
 input_shape = img_data[0].shape
-print(input_shape)
+# print(input_shape)
 
 os.chdir(os.path.dirname(__file__))
 
@@ -132,7 +132,7 @@ model.summary()
 start = time.time()
 np.argmax(model.predict(X_test[0:1]), axis=-1)
 end = time.time()
-print(end - start)
+# print(end - start)
 
 Y_pred = model.predict(X_test)
 # print(Y_pred)
@@ -158,11 +158,11 @@ def plot_confusion_matrix(
 
     if normalize:
         cm = cm.astype("float") / cm.sum(axis=1)[:, np.newaxis]
-        print("Normalized confusion matrix")
-    else:
-        print("Confusion matrix, without normalization")
+        # print("Normalized confusion matrix")
+    # else:
+        # print("Confusion matrix, without normalization")
 
-    print(cm)
+    # print(cm)
 
     # thresh = cm.max() / 2.
     # for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):

@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime
 from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
@@ -29,8 +30,8 @@ query = gql(
 )
 
 
-def archive_attempt(url, user_id, device_id, confidence, threshold):
-    transport = AIOHTTPTransport(url=url)
+def archive_attempt(user_id, device_id, confidence, threshold):
+    transport = AIOHTTPTransport(url=os.getenv("BACKEND_URL"))
     client = Client(transport=transport, fetch_schema_from_transport=True)
     scan_time = datetime.now().isoformat()
     params = {
