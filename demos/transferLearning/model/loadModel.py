@@ -27,8 +27,8 @@ PATH = os.getcwd()
 #Define data path
 data_path = PATH 
 data_dir_list = os.listdir(data_path)
-data_dir_list = data_dir_list[3:494]
-label_numbers = list(range(1, 493))
+data_dir_list = data_dir_list[2:]
+label_numbers = list(range(0, 500))
 
 #Create dictionary
 zip_iterator = zip(data_dir_list, label_numbers)

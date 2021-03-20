@@ -32,12 +32,13 @@ PATH = os.getcwd()
 #Define data path
 data_path = PATH 
 data_dir_list = os.listdir(data_path)
-data_dir_list = data_dir_list[3:494]
-label_numbers = list(range(1, 493))
+data_dir_list = data_dir_list[2:]
+label_numbers = list(range(0, 500))
 
 #Create dictionary
 zip_iterator = zip(data_dir_list, label_numbers)
 labels_name = dict(zip_iterator)
+print(labels_name)
 
 
 img_rows = 100
@@ -57,7 +58,7 @@ for dataset in data_dir_list:
     print ('Loading the images of dataset-'+'{}\n'.format(dataset))
     label = labels_name[dataset]
     for img in img_list:
-        if str(img)[-3:] == "jpg":
+        if str(img)[-3:] == "jpg" or str(img)[-3:] == "png":
             input_img=cv2.imread(data_path + '/'+ dataset + '/'+ img )
             if input_img is not None:
                 input_img=cv2.cvtColor(input_img, cv2.COLOR_BGR2GRAY)
