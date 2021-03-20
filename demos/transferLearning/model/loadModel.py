@@ -67,9 +67,12 @@ img_data /= 255
 
 print (img_data.shape)
 
+print("labels")
 labels = np.array(labels_list)
+print(labels)
 
 # print the count of number of samples for different classes
+print("unique Labels")
 print(np.unique(labels,return_counts=True))
 
 if num_channel==1:
