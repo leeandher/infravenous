@@ -9,11 +9,17 @@ export type BottomTabParamList = {
 };
 
 export type AboutParamList = {
-  AboutScreen: undefined;
+  About: undefined;
 };
 
 export type LogInParamList = {
-  LogInScreen: undefined;
+  LogIn: undefined;
+  IVCheck: {
+    email: string;
+    time: string;
+  };
+  IVSuccess: undefined;
+  IVFailure: undefined;
 };
 
 export type TabOneParamList = {

@@ -1,15 +1,61 @@
-import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
 import { StyleSheet } from "react-native";
 
+import { useQuery, gql } from "@apollo/client";
 import { Text, View } from "../components/Themed";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp, StackActions } from "@react-navigation/native";
+import { LogInParamList } from "../types";
+import { FontAwesome } from "@expo/vector-icons";
 
-export default function IVCheckScreen() {
+type IVCheckScreenNavigationProp = StackNavigationProp<
+  LogInParamList,
+  "IVCheck"
+>;
+type IVCheckScreenProps = {
+  navigation: IVCheckScreenNavigationProp;
+  route: RouteProp<LogInParamList, "IVCheck">;
+};
+
+const VALIDATE_USER_QUERY = gql`
+  query VALIDATE_USER_QUERY($email: String!) {
+    allUsers(where: { email: $email }) {
+      attempts(sortBy: scanTime_DESC, first: 1) {
+        scanTime
+        result
+      }
+    }
+  }
+`;
+
+export default function IVCheckScreen({
+  route,
+  navigation,
+}: IVCheckScreenProps) {
+  const { email, time } = route.params;
+  const startTime = new Date(time);
+
+  const { data, error } = useQuery(VALIDATE_USER_QUERY, {
+    variables: { email },
+    notifyOnNetworkStatusChange: true,
+    pollInterval: 500,
+    fetchPolicy: "network-only",
+  });
+
+  if (data) {
+    const latestAttempt = data.allUsers[0].attempts[0];
+    const latestScanTime = new Date(latestAttempt.scanTime);
+    const isValid = latestScanTime > startTime;
+    const isAuthenticated = latestAttempt.result === "Success";
+
+    if (isValid && isAuthenticated) {
+      navigation.dispatch(StackActions.replace("IVSuccess"));
+    } else if (isValid && !isAuthenticated) {
+      navigation.dispatch(StackActions.replace("IVFailure"));
+    }
+  }
   return (
     <View style={styles.container}>
-      <View style={styles.horizContainer}>
-        <Ionicons name="lock-closed-outline" size={60} color="black" />
-      </View>
       <Text style={styles.title}>Awaiting Infravenous Scan...</Text>
       <View
         style={styles.separator}
@@ -21,9 +67,10 @@ export default function IVCheckScreen() {
         lightColor="rgba(0,0,0,0.8)"
         darkColor="rgba(255,255,255,0.8)"
       >
-        This demonstration app is intended to mimic a user-facing implementation
-        in a third party app or system.
+        Go ahead and scan your finger in an Infravenous device paired with your
+        email:
       </Text>
+      <Text style={styles.fancyText}>{email}</Text>
     </View>
   );
 }
@@ -57,5 +104,14 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     textAlign: "center",
     width: "80%",
+  },
+  fancyText: {
+    marginBottom: 15,
+    fontSize: 19,
+    lineHeight: 24,
+    textAlign: "center",
+    width: "80%",
+    color: "skyblue",
+    fontWeight: "bold",
   },
 });

@@ -2,30 +2,26 @@ import * as React from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { useQuery, gql } from "@apollo/client";
-
+import { StackNavigationProp } from "@react-navigation/stack";
 import { Text, View } from "../components/Themed";
+import { LogInParamList } from "../types";
 
-const TEST_QUERY = gql`
-  query TEST_QUERY {
-    _allAttemptsMeta {
-      count
-    }
-  }
-`;
+type LoginScreenNavigationProp = StackNavigationProp<LogInParamList, "LogIn">;
+type LoginScreenProps = {
+  navigation: LoginScreenNavigationProp;
+};
 
-export default function LogInScreen() {
+export default function LogInScreen({ navigation }: LoginScreenProps) {
   const [email, onChangeEmail] = React.useState("");
   const [password, onChangePassword] = React.useState("");
 
-  const { loading, error, data } = useQuery(TEST_QUERY);
-  console.log(data);
   function handlePress() {
-    console.log(data);
+    navigation.navigate("IVCheck", { email, time: new Date().toISOString() });
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Log In</Text>
+      <Text style={styles.title}>Secure Log In</Text>
       <Text style={styles.inputLabel}>Email Address</Text>
       <TextInput
         style={styles.input}

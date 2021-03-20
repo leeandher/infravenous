@@ -8,12 +8,15 @@ export default {
         screens: {
           About: {
             screens: {
-              AboutScreen: "one",
+              AboutScreen: "about",
             },
           },
           LogIn: {
             screens: {
-              LogInScreen: "two",
+              LogInScreen: "login",
+              IVCheckScreen: "scan",
+              IVSuccessScreen: "scan-success",
+              IVFailureScreen: "scan-failure",
             },
           },
         },

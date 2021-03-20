@@ -7,6 +7,9 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import AboutScreen from "../screens/AboutScreen";
 import LogInScreen from "../screens/LogInScreen";
+import IVCheckScreen from "../screens/IVCheckScreen";
+import IVSuccessScreen from "../screens/IVSuccessScreen";
+import IVFailureScreen from "../screens/IVFailureScreen";
 import { AboutParamList, BottomTabParamList, LogInParamList } from "../types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -22,20 +25,24 @@ export default function BottomTabNavigator() {
       <BottomTab.Screen
         name="About"
         component={AboutScreenNavigator}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="information-circle-outline" color={color} />
-          ),
-        }}
+        options={
+          {
+            // tabBarIcon: ({ color }) => (
+            //   <TabBarIcon name="information-circle-outline" color={color} />
+            // ),
+          }
+        }
       />
       <BottomTab.Screen
         name="Log In"
         component={LogInNavigator}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="person-circle-outline" color={color} />
-          ),
-        }}
+        options={
+          {
+            // tabBarIcon: ({ color }) => (
+            //   <TabBarIcon name="person-circle-outline" color={color} />
+            // ),
+          }
+        }
       />
     </BottomTab.Navigator>
   );
@@ -58,7 +65,7 @@ function AboutScreenNavigator() {
   return (
     <AboutStack.Navigator>
       <AboutStack.Screen
-        name="AboutScreen"
+        name="About"
         component={AboutScreen}
         options={{ headerTitle: "💸💳💸💳💸💳💸💳💸💳💸💳💸💳💸" }}
       />
@@ -72,9 +79,24 @@ function LogInNavigator() {
   return (
     <LogInStack.Navigator>
       <LogInStack.Screen
-        name="LogInScreen"
+        name="LogIn"
         component={LogInScreen}
         options={{ headerTitle: "🚀🚀🚀 Log In to your Account 🚀🚀🚀" }}
+      />
+      <LogInStack.Screen
+        name="IVCheck"
+        component={IVCheckScreen}
+        options={{ headerTitle: "Please scan your finger..." }}
+      />
+      <LogInStack.Screen
+        name="IVSuccess"
+        component={IVSuccessScreen}
+        options={{ headerTitle: "Success! " }}
+      />
+      <LogInStack.Screen
+        name="IVFailure"
+        component={IVFailureScreen}
+        options={{ headerTitle: "Oops!" }}
       />
     </LogInStack.Navigator>
   );
