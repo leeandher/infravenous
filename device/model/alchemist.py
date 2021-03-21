@@ -8,9 +8,15 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras import backend as K
 from keras.utils import np_utils
 
+wkDir = "l_pink"
+cropPrefix = "lrop"
+finger = "3_3"
+fType = ".png"
+
 # PATH = os.chdir(r'C:\Users\2x3lu\OneDrive\Desktop\Published_database_FV-USM_Dec2013\1st_session\extractedvein')
+pText = r'C:\Users\2x3lu\OneDrive\Desktop\Published_database_FV-USM_Dec2013\1st_session\extractedvein\\'
 PATH = os.chdir(
-    r"C:\Users\2x3lu\OneDrive\Desktop\Published_database_FV-USM_Dec2013\1st_session\extractedvein\l_pink"
+    pText + wkDir
 )
 
 PATH = os.getcwd()
@@ -106,7 +112,7 @@ datagen = ImageDataGenerator(
 # img = img.reshape((1,) + img.shape)  # reshape image
 
 pic = tf.keras.preprocessing.image.load_img(
-    r"C:\Users\2x3lu\OneDrive\Desktop\Published_database_FV-USM_Dec2013\1st_session\extractedvein\l_pink\lrop3_1.png"
+    pText + wkDir + "\\" + cropPrefix + finger + fType
 )
 input_arr = image.img_to_array(pic) / 255.0
 input_arr = np.array([input_arr])
@@ -118,12 +124,12 @@ input_arr = np.array([input_arr])
 i = 0
 
 for batch in datagen.flow(
-    input_arr, save_prefix="test", save_format="png", save_to_dir=os.getcwd()
+    input_arr, save_prefix=cropPrefix + finger, save_format="png", save_to_dir=os.getcwd()
 ):  # this loops runs forever until we break, saving images to current directory with specified prefix
     # plt.figure(i)
     # plot = plt.imshow(image.img_to_array(batch[0]))
     i += 1
-    if i > 10:  # show 4 images
+    if i > 3:  # show 4 images
         break
 
 plt.show()
