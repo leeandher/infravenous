@@ -12,7 +12,9 @@ input DeviceRelateToOneInput {
   disconnectAll: Boolean
 }
 
-""" A keystone list """
+"""
+ A keystone list
+"""
 type Attempt {
   id: ID!
   confidence: Int
@@ -118,16 +120,46 @@ input AttemptRelateToManyInput {
   disconnectAll: Boolean
 }
 
-""" A keystone list """
+"""
+ A keystone list
+"""
 type Device {
   id: ID!
   name: String
   description: String
   threshold: Int
-  users(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): [User!]!
-  _usersMeta(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
-  attempts(where: AttemptWhereInput, search: String, sortBy: [SortAttemptsBy!], orderBy: String, first: Int, skip: Int): [Attempt!]!
-  _attemptsMeta(where: AttemptWhereInput, search: String, sortBy: [SortAttemptsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+  users(
+    where: UserWhereInput
+    search: String
+    sortBy: [SortUsersBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [User!]!
+  _usersMeta(
+    where: UserWhereInput
+    search: String
+    sortBy: [SortUsersBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  attempts(
+    where: AttemptWhereInput
+    search: String
+    sortBy: [SortAttemptsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Attempt!]!
+  _attemptsMeta(
+    where: AttemptWhereInput
+    search: String
+    sortBy: [SortAttemptsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
 }
 
 input DeviceWhereInput {
@@ -182,22 +214,34 @@ input DeviceWhereInput {
   threshold_in: [Int]
   threshold_not_in: [Int]
 
-  """ condition must be true for all nodes """
+  """
+   condition must be true for all nodes
+  """
   users_every: UserWhereInput
 
-  """ condition must be true for at least 1 node """
+  """
+   condition must be true for at least 1 node
+  """
   users_some: UserWhereInput
 
-  """ condition must be false for all nodes """
+  """
+   condition must be false for all nodes
+  """
   users_none: UserWhereInput
 
-  """ condition must be true for all nodes """
+  """
+   condition must be true for all nodes
+  """
   attempts_every: AttemptWhereInput
 
-  """ condition must be true for at least 1 node """
+  """
+   condition must be true for at least 1 node
+  """
   attempts_some: AttemptWhereInput
 
-  """ condition must be false for all nodes """
+  """
+   condition must be false for all nodes
+  """
   attempts_none: AttemptWhereInput
 }
 
@@ -252,17 +296,47 @@ input DeviceRelateToManyInput {
   disconnectAll: Boolean
 }
 
-""" A keystone list """
+"""
+ A keystone list
+"""
 type User {
   id: ID!
   name: String
   email: String
   password_is_set: Boolean
   createdAt: String
-  devices(where: DeviceWhereInput, search: String, sortBy: [SortDevicesBy!], orderBy: String, first: Int, skip: Int): [Device!]!
-  _devicesMeta(where: DeviceWhereInput, search: String, sortBy: [SortDevicesBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
-  attempts(where: AttemptWhereInput, search: String, sortBy: [SortAttemptsBy!], orderBy: String, first: Int, skip: Int): [Attempt!]!
-  _attemptsMeta(where: AttemptWhereInput, search: String, sortBy: [SortAttemptsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+  devices(
+    where: DeviceWhereInput
+    search: String
+    sortBy: [SortDevicesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Device!]!
+  _devicesMeta(
+    where: DeviceWhereInput
+    search: String
+    sortBy: [SortDevicesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  attempts(
+    where: AttemptWhereInput
+    search: String
+    sortBy: [SortAttemptsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Attempt!]!
+  _attemptsMeta(
+    where: AttemptWhereInput
+    search: String
+    sortBy: [SortAttemptsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
   passwordResetToken_is_set: Boolean
   passwordResetIssuedAt: String
   passwordResetRedeemedAt: String
@@ -324,22 +398,34 @@ input UserWhereInput {
   createdAt_in: [String]
   createdAt_not_in: [String]
 
-  """ condition must be true for all nodes """
+  """
+   condition must be true for all nodes
+  """
   devices_every: DeviceWhereInput
 
-  """ condition must be true for at least 1 node """
+  """
+   condition must be true for at least 1 node
+  """
   devices_some: DeviceWhereInput
 
-  """ condition must be false for all nodes """
+  """
+   condition must be false for all nodes
+  """
   devices_none: DeviceWhereInput
 
-  """ condition must be true for all nodes """
+  """
+   condition must be true for all nodes
+  """
   attempts_every: AttemptWhereInput
 
-  """ condition must be true for at least 1 node """
+  """
+   condition must be true for at least 1 node
+  """
   attempts_some: AttemptWhereInput
 
-  """ condition must be false for all nodes """
+  """
+   condition must be false for all nodes
+  """
   attempts_none: AttemptWhereInput
   passwordResetToken_is_set: Boolean
   passwordResetIssuedAt: String
@@ -446,7 +532,10 @@ input UsersCreateInput {
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
-scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+scalar JSON
+  @specifiedBy(
+    url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf"
+  )
 
 type _ListAccess {
   """
@@ -484,77 +573,119 @@ type _ListAccess {
 }
 
 type _ListQueries {
-  """Single-item query name"""
+  """
+  Single-item query name
+  """
   item: String
 
-  """All-items query name"""
+  """
+  All-items query name
+  """
   list: String
 
-  """List metadata query name"""
+  """
+  List metadata query name
+  """
   meta: String
 }
 
 type _ListMutations {
-  """Create mutation name"""
+  """
+  Create mutation name
+  """
   create: String
 
-  """Create many mutation name"""
+  """
+  Create many mutation name
+  """
   createMany: String
 
-  """Update mutation name"""
+  """
+  Update mutation name
+  """
   update: String
 
-  """Update many mutation name"""
+  """
+  Update many mutation name
+  """
   updateMany: String
 
-  """Delete mutation name"""
+  """
+  Delete mutation name
+  """
   delete: String
 
-  """Delete many mutation name"""
+  """
+  Delete many mutation name
+  """
   deleteMany: String
 }
 
 type _ListInputTypes {
-  """Input type for matching multiple items"""
+  """
+  Input type for matching multiple items
+  """
   whereInput: String
 
-  """Input type for matching a unique item"""
+  """
+  Input type for matching a unique item
+  """
   whereUniqueInput: String
 
-  """Create mutation input type name"""
+  """
+  Create mutation input type name
+  """
   createInput: String
 
-  """Create many mutation input type name"""
+  """
+  Create many mutation input type name
+  """
   createManyInput: String
 
-  """Update mutation name input"""
+  """
+  Update mutation name input
+  """
   updateInput: String
 
-  """Update many mutation name input"""
+  """
+  Update many mutation name input
+  """
   updateManyInput: String
 }
 
 type _ListSchemaFields {
-  """The path of the field in its list"""
+  """
+  The path of the field in its list
+  """
   path: String
 
-  """The name of the field in its list"""
+  """
+  The name of the field in its list
+  """
   name: String @deprecated(reason: "Use `path` instead")
 
-  """The field type (ie, Checkbox, Text, etc)"""
+  """
+  The field type (ie, Checkbox, Text, etc)
+  """
   type: String
 }
 
 type _ListSchemaRelatedFields {
-  """The typename as used in GraphQL queries"""
+  """
+  The typename as used in GraphQL queries
+  """
   type: String
 
-  """A list of GraphQL field names"""
+  """
+  A list of GraphQL field names
+  """
   fields: [String]
 }
 
 type _ListSchema {
-  """The typename as used in GraphQL queries"""
+  """
+  The typename as used in GraphQL queries
+  """
   type: String
 
   """
@@ -563,13 +694,19 @@ type _ListSchema {
   """
   queries: _ListQueries
 
-  """Top-level GraphQL mutation names"""
+  """
+  Top-level GraphQL mutation names
+  """
   mutations: _ListMutations
 
-  """Top-level GraphQL input types"""
+  """
+  Top-level GraphQL input types
+  """
   inputTypes: _ListInputTypes
 
-  """Information about fields defined on this list"""
+  """
+  Information about fields defined on this list
+  """
   fields(where: _ListSchemaFieldsInput): [_ListSchemaFields]
 
   """
@@ -580,31 +717,49 @@ type _ListSchema {
 }
 
 type _ListMeta {
-  """The Keystone list key"""
+  """
+  The Keystone list key
+  """
   key: String
 
-  """The Keystone List name"""
+  """
+  The Keystone List name
+  """
   name: String @deprecated(reason: "Use `key` instead")
 
-  """The list's user-facing description"""
+  """
+  The list's user-facing description
+  """
   description: String
 
-  """The list's display name in the Admin UI"""
+  """
+  The list's display name in the Admin UI
+  """
   label: String
 
-  """The list's singular display name"""
+  """
+  The list's singular display name
+  """
   singular: String
 
-  """The list's plural display name"""
+  """
+  The list's plural display name
+  """
   plural: String
 
-  """The list's data path"""
+  """
+  The list's data path
+  """
   path: String
 
-  """Access control configuration for the currently authenticated request"""
+  """
+  Access control configuration for the currently authenticated request
+  """
   access: _ListAccess
 
-  """Information on the generated GraphQL schema"""
+  """
+  Information on the generated GraphQL schema
+  """
   schema: _ListSchema
 }
 
@@ -615,7 +770,9 @@ type _QueryMeta {
 input _ksListsMetaInput {
   key: String
 
-  """Whether this is an auxiliary helper list"""
+  """
+  Whether this is an auxiliary helper list
+  """
   auxiliary: Boolean
 }
 
@@ -624,118 +781,231 @@ input _ListSchemaFieldsInput {
 }
 
 type Query {
-  """ Search for all Attempt items which match the where clause. """
-  allAttempts(where: AttemptWhereInput, search: String, sortBy: [SortAttemptsBy!], orderBy: String, first: Int, skip: Int): [Attempt]
+  """
+   Search for all Attempt items which match the where clause.
+  """
+  allAttempts(
+    where: AttemptWhereInput
+    search: String
+    sortBy: [SortAttemptsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Attempt]
 
-  """ Search for the Attempt item with the matching ID. """
+  """
+   Search for the Attempt item with the matching ID.
+  """
   Attempt(where: AttemptWhereUniqueInput!): Attempt
 
-  """ Perform a meta-query on all Attempt items which match the where clause. 
   """
-  _allAttemptsMeta(where: AttemptWhereInput, search: String, sortBy: [SortAttemptsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+   Perform a meta-query on all Attempt items which match the where clause.
+  """
+  _allAttemptsMeta(
+    where: AttemptWhereInput
+    search: String
+    sortBy: [SortAttemptsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
 
-  """ Retrieve the meta-data for the Attempt list. """
+  """
+   Retrieve the meta-data for the Attempt list.
+  """
   _AttemptsMeta: _ListMeta
 
-  """ Search for all Device items which match the where clause. """
-  allDevices(where: DeviceWhereInput, search: String, sortBy: [SortDevicesBy!], orderBy: String, first: Int, skip: Int): [Device]
+  """
+   Search for all Device items which match the where clause.
+  """
+  allDevices(
+    where: DeviceWhereInput
+    search: String
+    sortBy: [SortDevicesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Device]
 
-  """ Search for the Device item with the matching ID. """
+  """
+   Search for the Device item with the matching ID.
+  """
   Device(where: DeviceWhereUniqueInput!): Device
 
-  """ Perform a meta-query on all Device items which match the where clause. 
   """
-  _allDevicesMeta(where: DeviceWhereInput, search: String, sortBy: [SortDevicesBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+   Perform a meta-query on all Device items which match the where clause.
+  """
+  _allDevicesMeta(
+    where: DeviceWhereInput
+    search: String
+    sortBy: [SortDevicesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
 
-  """ Retrieve the meta-data for the Device list. """
+  """
+   Retrieve the meta-data for the Device list.
+  """
   _DevicesMeta: _ListMeta
 
-  """ Search for all User items which match the where clause. """
-  allUsers(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): [User]
+  """
+   Search for all User items which match the where clause.
+  """
+  allUsers(
+    where: UserWhereInput
+    search: String
+    sortBy: [SortUsersBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [User]
 
-  """ Search for the User item with the matching ID. """
+  """
+   Search for the User item with the matching ID.
+  """
   User(where: UserWhereUniqueInput!): User
 
-  """ Perform a meta-query on all User items which match the where clause. """
-  _allUsersMeta(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+  """
+   Perform a meta-query on all User items which match the where clause.
+  """
+  _allUsersMeta(
+    where: UserWhereInput
+    search: String
+    sortBy: [SortUsersBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
 
-  """ Retrieve the meta-data for the User list. """
+  """
+   Retrieve the meta-data for the User list.
+  """
   _UsersMeta: _ListMeta
 
-  """ Retrieve the meta-data for all lists. """
+  """
+   Retrieve the meta-data for all lists.
+  """
   _ksListsMeta(where: _ksListsMetaInput): [_ListMeta]
 
-  """The version of the Keystone application serving this API."""
+  """
+  The version of the Keystone application serving this API.
+  """
   appVersion: String
   authenticatedItem: AuthenticatedItem
   keystone: KeystoneMeta!
 }
 
 type Mutation {
-  """ Create a single Attempt item. """
+  """
+   Create a single Attempt item.
+  """
   createAttempt(data: AttemptCreateInput): Attempt
 
-  """ Create multiple Attempt items. """
+  """
+   Create multiple Attempt items.
+  """
   createAttempts(data: [AttemptsCreateInput]): [Attempt]
 
-  """ Update a single Attempt item by ID. """
+  """
+   Update a single Attempt item by ID.
+  """
   updateAttempt(id: ID!, data: AttemptUpdateInput): Attempt
 
-  """ Update multiple Attempt items by ID. """
+  """
+   Update multiple Attempt items by ID.
+  """
   updateAttempts(data: [AttemptsUpdateInput]): [Attempt]
 
-  """ Delete a single Attempt item by ID. """
+  """
+   Delete a single Attempt item by ID.
+  """
   deleteAttempt(id: ID!): Attempt
 
-  """ Delete multiple Attempt items by ID. """
+  """
+   Delete multiple Attempt items by ID.
+  """
   deleteAttempts(ids: [ID!]): [Attempt]
 
-  """ Create a single Device item. """
+  """
+   Create a single Device item.
+  """
   createDevice(data: DeviceCreateInput): Device
 
-  """ Create multiple Device items. """
+  """
+   Create multiple Device items.
+  """
   createDevices(data: [DevicesCreateInput]): [Device]
 
-  """ Update a single Device item by ID. """
+  """
+   Update a single Device item by ID.
+  """
   updateDevice(id: ID!, data: DeviceUpdateInput): Device
 
-  """ Update multiple Device items by ID. """
+  """
+   Update multiple Device items by ID.
+  """
   updateDevices(data: [DevicesUpdateInput]): [Device]
 
-  """ Delete a single Device item by ID. """
+  """
+   Delete a single Device item by ID.
+  """
   deleteDevice(id: ID!): Device
 
-  """ Delete multiple Device items by ID. """
+  """
+   Delete multiple Device items by ID.
+  """
   deleteDevices(ids: [ID!]): [Device]
 
-  """ Create a single User item. """
+  """
+   Create a single User item.
+  """
   createUser(data: UserCreateInput): User
 
-  """ Create multiple User items. """
+  """
+   Create multiple User items.
+  """
   createUsers(data: [UsersCreateInput]): [User]
 
-  """ Update a single User item by ID. """
+  """
+   Update a single User item by ID.
+  """
   updateUser(id: ID!, data: UserUpdateInput): User
 
-  """ Update multiple User items by ID. """
+  """
+   Update multiple User items by ID.
+  """
   updateUsers(data: [UsersUpdateInput]): [User]
 
-  """ Delete a single User item by ID. """
+  """
+   Delete a single User item by ID.
+  """
   deleteUser(id: ID!): User
 
-  """ Delete multiple User items by ID. """
+  """
+   Delete multiple User items by ID.
+  """
   deleteUsers(ids: [ID!]): [User]
-  authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult!
-  createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
+  authenticateUserWithPassword(
+    email: String!
+    password: String!
+  ): UserAuthenticationWithPasswordResult!
+  createInitialUser(
+    data: CreateInitialUserInput!
+  ): UserAuthenticationWithPasswordSuccess!
   endSession: Boolean!
 }
 
-"""The `Upload` scalar type represents a file upload."""
+"""
+The `Upload` scalar type represents a file upload.
+"""
 scalar Upload
 
 union AuthenticatedItem = User
 
-union UserAuthenticationWithPasswordResult = UserAuthenticationWithPasswordSuccess | UserAuthenticationWithPasswordFailure
+union UserAuthenticationWithPasswordResult =
+    UserAuthenticationWithPasswordSuccess
+  | UserAuthenticationWithPasswordFailure
 
 type UserAuthenticationWithPasswordSuccess {
   sessionToken: String!
